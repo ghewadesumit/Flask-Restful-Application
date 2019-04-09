@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"> 
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Weather Application</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}">
+
+</head>
+<body >
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">Weather Forecast</a>
+	    </div>
+	  </div>
+	</nav>
+	<div class="container">
+	  <div class="jumbotron">
+	    <h1>Know Weather Forecast</h1> 
+	    <p>Click a date from which you would like to know weather of 
+	    next 7 days and plan accordingly.</p> 
+	  </div>
+	</div>
+
+	<!--************              FORM                ******************************* -->
+	<div class="container">
+		<div class="col-lg-4">
+			<form  action ='/weather/' method='post'>
+				<label for='Date'> <h4><b>Select Forecast Date:</b></h4> </label>
+				<div class = "form-group">
+					<input type="text" placeholder="yyyymmdd" name="Dates"  class="form-control" value ="{{request.form.Date}}" id="date">
+				</div>
+				<button type="submit" value="Submit" class="btn btn-danger btn-md">Submit</button>
+			</form>
+		</div>
+	</div>
+
+	<div class="container">
+	  <h2>Forecast for next 7 days</h2>
+	  <p>This forecast is approximation of what can happen in next 7 days and there is no guarantee that this data is accurate.</p>            
+	  <table class="table">
+	    <thead>
+	      <tr>
+	        <th>DATE</th>
+	        <th>Max Temp</th>
+	        <th>Min Temp</th>
+	      </tr>
+	    </thead>
+
+	    <tbody>
+	    	{% for items in forecast %}
+		   		<tr>	
+		      		<td>{{ items.DATES }}</td>
+		      		<td>{{ items.TMAX }}</td>
+		      		<td>{{ items.TMIN }}</td>
+		 		</tr>
+		    {% endfor %}
+
+	      
+	    </tbody>
+	  </table>
+	</div>
+
+
+</body>
+</html>
